@@ -1,0 +1,42 @@
+[
+    {
+        "role": "Anti-virus",
+        "img": "/img/player-card/anti-virus.png",
+        "player": ""
+    },
+    {
+        "role": "Bluetooth",
+        "img": "/img/player-card/bluetooth.png",
+        "player": ""
+    },
+    {
+        "role": "Firewall",
+        "img": "/img/player-card/firewall.png",
+        "player": ""
+    },
+    {
+        "role": "Employee",
+        "img": "/img/player-card/employee.png",
+        "player": ""
+    },
+    {
+        "role": "Flaw",
+        "img": "/img/player-card/flaw.png",
+        "player": ""
+    },
+    {
+        "role": "Cybersecurity",
+        "img": "/img/player-card/cyber-security.png",
+        "player": ""
+    },
+    {
+        "role": "Drive",
+        "img": "/img/player-card/drive.png",
+        "player": ""
+    },
+    {
+        "role": "Hacker",
+        "img": "/img/player-card/hacker.png",
+        "player": ""
+    }
+]
