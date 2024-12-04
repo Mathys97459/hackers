@@ -1,34 +1,55 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import rolesJson from "../../lib/roles.json"; // Importation du fichier JSON contenant les rôles
 
 export default function RoleDistribution() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const numPlayers = Number(searchParams.get("players"));
     const [roles, setRoles] = useState([]);
     const [rolesData, setRolesData] = useState([]);
-    const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+    const [currentRoleIndex, setCurrentRoleIndex] = useState(-1);
     const [flipped, setFlipped] = useState(true);
     const [playerName, setPlayerName] = useState("");
     const [modal, setModal] = useState({ visible: false, message: "", type: "" });
 
     useEffect(() => {
         if (numPlayers) {
-            const specialRoles = rolesJson.map(role => ({ ...role }));
-            const remainingPlayers = numPlayers - specialRoles.length;
+            const specialRoles = rolesJson.filter(role => role.role !== "Employee" && role.role !== "Hacker").map(role => ({ ...role }));
+            const hackersCount = Math.round(numPlayers / 3);
+            const remainingPlayers = numPlayers - hackersCount;
 
-            const allRoles = [
-                ...specialRoles,
-                ...Array(remainingPlayers).fill({
-                    role: "Villageois",
-                    img: "/img/player-card/villageois.png",
-                    player: ""
+            // Rôles initiaux avec hackers
+            const initialRoles = [
+                ...Array(hackersCount).fill({
+                    role: "Hacker",
+                    img: "/img/player-card/hacker.png",
+                    player: "",
                 }),
             ];
 
+            // Ajout de rôles aléatoires parmi les rôles spéciaux (hors employee)
+            const shuffledSpecialRoles = specialRoles.sort(() => Math.random() - 0.5);
+            let remainingSpecialRoles = shuffledSpecialRoles.slice(0, remainingPlayers);
+
+            // Compléter avec des employees si nécessaire
+            const employeesCount = remainingPlayers - remainingSpecialRoles.length;
+            const employees = Array(employeesCount).fill({
+                role: "Employee",
+                img: "/img/player-card/employee.png",
+                player: "",
+            });
+
+            const allRoles = [
+                ...initialRoles,
+                ...remainingSpecialRoles,
+                ...employees,
+            ];
+
             const shuffledRoles = allRoles.sort(() => Math.random() - 0.5);
+
             setRoles(shuffledRoles.map(role => role.role));
             setRolesData(shuffledRoles);
 
@@ -43,16 +64,15 @@ export default function RoleDistribution() {
             setModal({
                 visible: true,
                 message: "You have to enter a name.",
-                type: "error"
+                type: "error",
             });
             return;
         }
 
         if (flipped) {
             setPlayerName("");
-            setCurrentRoleIndex(currentRoleIndex + 1);
         }
-
+        setCurrentRoleIndex(currentRoleIndex + 1);
         setFlipped(!flipped);
     };
 
@@ -70,11 +90,17 @@ export default function RoleDistribution() {
             setRolesData(updatedRolesData);
             setFlipped(true);
             localStorage.setItem("roles", JSON.stringify(updatedRolesData));
+
+            // Vérifier si tous les rôles ont été assignés
+            if (updatedRolesData.every(role => role.player.trim() !== "")) {
+                // Redirection vers la page /game
+                router.push("/game");
+            }
         } else {
             setModal({
                 visible: true,
                 message: "Please enter a valid name.",
-                type: "error"
+                type: "error",
             });
         }
     };
@@ -85,7 +111,7 @@ export default function RoleDistribution() {
 
     const getRoleImage = (role) => {
         const roleData = rolesData.find(r => r.role === role);
-        return roleData ? roleData.img : "/img/player-card/default.png";
+        return roleData ? roleData.img : "/img/player-card/employee.png";
     };
 
     return (
@@ -106,7 +132,7 @@ export default function RoleDistribution() {
                 </div>
             )}
 
-            {currentRoleIndex < roles.length ? (
+            {currentRoleIndex < roles.length && (
                 <div className="flex flex-col items-center pt-20">
                     <>
                         {flipped ? (
@@ -166,27 +192,6 @@ export default function RoleDistribution() {
                             </div>
                         </div>
                     )}
-                </div>
-            ) : (
-                <div className="flex flex-col items-center mt-6">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {rolesData.map((role, index) => (
-                            <li
-                                key={index}
-                                className="flex flex-col items-center p-4 border rounded shadow-md"
-                            >
-                                <img
-                                    src={role.img}
-                                    alt={role.role}
-                                    className="w-20 h-20 mb-2 rounded-full"
-                                />
-                                <p className="text-lg font-semibold">{role.role}</p>
-                                <p className="text-sm text-gray-600">
-                                    {role.player ? role.player : "Non assigné"}
-                                </p>
-                            </li>
-                        ))}
-                    </ul>
                 </div>
             )}
         </main>

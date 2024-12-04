@@ -2,41 +2,49 @@
     {
         "role": "Anti-virus",
         "img": "/img/player-card/anti-virus.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Bluetooth",
         "img": "/img/player-card/bluetooth.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Firewall",
         "img": "/img/player-card/firewall.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Employee",
         "img": "/img/player-card/employee.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Flaw",
         "img": "/img/player-card/flaw.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Cybersecurity",
         "img": "/img/player-card/cyber-security.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Drive",
         "img": "/img/player-card/drive.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     },
     {
         "role": "Hacker",
         "img": "/img/player-card/hacker.png",
-        "player": ""
+        "player": "",
+        "atouts" : []
     }
 ]
