@@ -1,0 +1,8 @@
+{
+    "nightNumber": 1,
+    "events": {
+        "noEvents": 2,
+        "blackout": 2,
+        "update": 2
+    }
+}

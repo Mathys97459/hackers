@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Players from "../composants/Players";
 import Night from "../composants/Night";
+import gameData from "../lib/game.json";
 
 export default function Game() {
     const [showPlayers, setShowPlayers] = useState(false);
@@ -20,32 +21,19 @@ export default function Game() {
                         onClick={handlePlayersClick}
                     >
                         <h1 className="text-white text-center text-6xl">PLAYERS</h1>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="50"
-                            height="50"
-                            fill="white"
-                            className="bi bi-arrow-down-short"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="white" className="bi bi-arrow-up-short" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5" />
                         </svg>
                     </div>
                 )}
-                <div
-                    className={`transition-all duration-300 ${showPlayers ? "h-0 opacity-0 pointer-events-none" : "h-full"
-                        }`}
-                >
+                <div className={`transition-all duration-300 ${showPlayers ? "h-0 opacity-0 pointer-events-none" : "h-full"}`}>
                     <Night />
                 </div>
-                
             </div>
             {showPlayers && (
-                    <Players />
-                )}
+                <Players />
+
+            )}
         </>
     );
 }
