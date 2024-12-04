@@ -12,11 +12,12 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-6">Mini-Jeu : Sélection du nombre de joueurs</h1>
+    <main className="flex flex-col items-center text-white gap-10 justify-start pt-28 h-screen">
+      <h1 className="text-4xl font-bold mb-6">Hackers</h1>
+      <img className="w-6/12" src="/img/dos-carte.png"/>
       <div className="flex flex-col items-center">
-        <label htmlFor="players" className="text-lg mb-2">
-          Nombre de joueurs : {players}
+        <label htmlFor="players" className="text-sm mb-2">
+          Number of players : {players}
         </label>
         <input
           id="players"
@@ -25,13 +26,13 @@ export default function Home() {
           max="16"
           value={players}
           onChange={(e) => setPlayers(Number(e.target.value))}
-          className="w-64"
+          className="w-64 color-black"
         />
         <button
           onClick={handleStartGame}
-          className="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="mt-5 px-6 py-2 bg-white text-violet-900 border border-slate-400 rounded hover:bg-blue-600"
         >
-          Distribuer les rôles
+          PLAY GAME
         </button>
       </div>
     </main>

@@ -10,7 +10,6 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: url("/img/background.png");
   font-family: 'Anybody', sans-serif;
-  
 }
