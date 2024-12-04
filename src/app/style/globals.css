@@ -13,3 +13,12 @@ body {
   background: url("/img/background.png");
   font-family: 'Anybody', sans-serif;
 }
+
+.players{
+  background: url("/img/moon.png");
+}
+
+#night{
+  background: url("/img/background.png");
+  background-size: cover;
+}

@@ -12,7 +12,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center text-white gap-10 justify-start pt-28 h-screen">
+    <main className="bg-[url('/img/background.png')] flex flex-col items-center text-white gap-10 justify-start pt-28 h-screen">
       <h1 className="text-4xl font-bold mb-6">Hackers</h1>
       <img className="w-6/12" src="/img/dos-carte.png"/>
       <div className="flex flex-col items-center">
