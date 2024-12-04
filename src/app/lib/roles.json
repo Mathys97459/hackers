@@ -3,48 +3,63 @@
         "role": "Anti-virus",
         "img": "/img/player-card/anti-virus.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     },
     {
         "role": "Bluetooth",
         "img": "/img/player-card/bluetooth.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     },
     {
         "role": "Firewall",
         "img": "/img/player-card/firewall.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false
     },
     {
         "role": "Employee",
         "img": "/img/player-card/employee.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     },
     {
         "role": "Flaw",
         "img": "/img/player-card/flaw.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     },
     {
         "role": "Cybersecurity",
         "img": "/img/player-card/cyber-security.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     },
     {
         "role": "Drive",
         "img": "/img/player-card/drive.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     },
     {
         "role": "Hacker",
         "img": "/img/player-card/hacker.png",
         "player": "",
-        "atouts" : []
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false
     }
 ]

@@ -27,6 +27,9 @@ export default function RoleDistribution() {
                     role: "Hacker",
                     img: "/img/player-card/hacker.png",
                     player: "",
+                    atouts: [],
+                    hacked : false,
+                    eliminated : false
                 }),
             ];
 
@@ -40,6 +43,9 @@ export default function RoleDistribution() {
                 role: "Employee",
                 img: "/img/player-card/employee.png",
                 player: "",
+                atouts: [],
+                hacked : false,
+                eliminated : false
             });
 
             const allRoles = [
