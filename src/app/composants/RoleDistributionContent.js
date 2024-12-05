@@ -182,14 +182,14 @@ export default function RoleDistributionContent() {
                     </div>
 
                     {!flipped && (
-                        <div className="flex flex-col items-center mt-4">
+                        <div className="flex flex-col items-center mt-4 w-100">
                             <div className="flex gap-2">
                                 <input
                                     type="text"
                                     value={playerName}
                                     onChange={handleNameChange}
                                     placeholder="Register your name"
-                                    className="p-2 border rounded"
+                                    className="p-2 border rounded w-60"
                                 />
                                 <button
                                     onClick={handleSubmit}
