@@ -675,6 +675,10 @@ video {
   height: 100vh;
 }
 
+.h-svh {
+  height: 100svh;
+}
+
 .w-12 {
   width: 3rem;
 }

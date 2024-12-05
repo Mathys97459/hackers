@@ -123,7 +123,7 @@ export default function RoleDistributionContent() {
     };
 
     return (
-        <main className="bg-[url('/img/background.png')] flex flex-col items-center pt-10 h-screen">
+        <main className="bg-[url('/img/background.png')] flex flex-col items-center pt-10 h-svh">
             {modal.visible && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded shadow-lg text-center">

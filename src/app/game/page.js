@@ -14,7 +14,7 @@ export default function Game() {
 
     return (
         <>
-            <div className={`${!showPlayers ? "h-screen" : "h-0"} relative overflow-hidden transition-all duration-300`}>
+            <div className={`${!showPlayers ? "h-svh" : "h-0"} relative overflow-hidden transition-all duration-300`}>
                 {!showPlayers && (
                     <div
                         className={`w-100 bg-[url('/img/moon.png')] bg-cover bg-center w-100 h-1/2 flex flex-col justify-end items-center pb-8 cursor-pointer transition-all duration-300`}
