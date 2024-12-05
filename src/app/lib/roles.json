@@ -5,7 +5,9 @@
         "player": "",
         "atouts" : [],
         "hacked" : false,
-        "eliminated" : false
+        "eliminated" : false,
+        "description" : "Identifies one player's role per night.",
+        "info" : "Software designed to detect, prevent, and remove malware and other malicious software from a computer or device."
     },
     {
         "role": "Bluetooth",
@@ -13,46 +15,9 @@
         "player": "",
         "atouts" : [],
         "hacked" : false,
-        "eliminated" : false
-    },
-    {
-        "role": "Firewall",
-        "img": "/img/player-card/firewall.png",
-        "player": "",
-        "atouts" : [],
-        "hacked" : false
-    },
-    {
-        "role": "Employee",
-        "img": "/img/player-card/employee.png",
-        "player": "",
-        "atouts" : [],
-        "hacked" : false,
-        "eliminated" : false
-    },
-    {
-        "role": "Flaw",
-        "img": "/img/player-card/flaw.png",
-        "player": "",
-        "atouts" : [],
-        "hacked" : false,
-        "eliminated" : false
-    },
-    {
-        "role": "Cybersecurity",
-        "img": "/img/player-card/cyber-security.png",
-        "player": "",
-        "atouts" : [],
-        "hacked" : false,
-        "eliminated" : false
-    },
-    {
-        "role": "Drive",
-        "img": "/img/player-card/drive.png",
-        "player": "",
-        "atouts" : [],
-        "hacked" : false,
-        "eliminated" : false
+        "eliminated" : false,
+        "description" : "Forms a couple during the first night.",
+        "info" : "A wireless technology standard used for exchanging data over short distances between devices."
     },
     {
         "role": "Hacker",
@@ -60,6 +25,57 @@
         "player": "",
         "atouts" : [],
         "hacked" : false,
-        "eliminated" : false
+        "eliminated" : false,
+        "description" : "Hack one player each night. If multiple hackers remains, they must agree on their target.",
+        "info" : "A person skilled in computer systems who may exploit vulnerabilities for malicious purposes or improve system security."
+    },
+    {
+        "role": "Firewall",
+        "img": "/img/player-card/firewall.png",
+        "player": "",
+        "atouts" : [],
+        "hacked" : false,
+        "description" : "When eliminated, the Firewall takes another player down with them.",
+        "info" : "A security system that monitors and controls incoming and outgoing network traffic based on predetermined rules."
+    },
+    {
+        "role": "Staff",
+        "img": "/img/player-card/staff.png",
+        "player": "",
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false,
+        "description" : "No special abilities but participates in debates and voting.",
+        "info" : "A worker in an organization who may inadvertently or intentionally pose cybersecurity risks."
+    },
+    {
+        "role": "Flaw",
+        "img": "/img/player-card/flaw.png",
+        "player": "",
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false,
+        "description" : "Can spy on the hackers during their turn but risks being hacked if notices.",
+        "info" : "A vulnerability or weakness in a system or software that can be exploited by attackers."
+    },
+    {
+        "role": "Drive",
+        "img": "/img/player-card/drive.png",
+        "player": "",
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false,
+        "description" : "Can transfer their atout card to another player.",
+        "info" : "A storage device or space (physical or virtual) used to save, access, and manage digital data."
+    },
+    {
+        "role": "Cybersecurity",
+        "img": "/img/player-card/cyber-security.png",
+        "player": "",
+        "atouts" : [],
+        "hacked" : false,
+        "eliminated" : false,
+        "description" : "Can use two unique powers (once each): unhack a player (including themselves) or hack a player(eliminates hackers).",
+        "info" : "The practice of protecting systems, networks, and data from cyber threats and unauthorized access."
     }
 ]

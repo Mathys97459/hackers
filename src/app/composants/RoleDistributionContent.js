@@ -17,7 +17,7 @@ export default function RoleDistributionContent() {
 
     useEffect(() => {
         if (numPlayers) {
-            const specialRoles = rolesJson.filter(role => role.role !== "Employee" && role.role !== "Hacker").map(role => ({ ...role }));
+            const specialRoles = rolesJson.filter(role => role.role !== "Staff" && role.role !== "Hacker").map(role => ({ ...role }));
             const hackersCount = numPlayers <= 12 ? Math.floor(numPlayers / 3.5) : Math.ceil(numPlayers / 3.5);
             const remainingPlayers = numPlayers - hackersCount;
 
@@ -28,33 +28,35 @@ export default function RoleDistributionContent() {
                     img: "/img/player-card/hacker.png",
                     player: "",
                     atouts: [],
-                    hacked : false,
-                    eliminated : false
+                    hacked: false,
+                    eliminated: false,
+                    "description": "Hack one player each night. If multiple hackers remains, they must agree on their target.",
+                    "info": "A person skilled in computer systems who may exploit vulnerabilities for malicious purposes or improve system security."
                 }),
             ];
 
-            // Ajout de rôles aléatoires parmi les rôles spéciaux (hors employee)
+            // Ajout de rôles aléatoires parmi les rôles spéciaux (hors staff)
             const shuffledSpecialRoles = specialRoles.sort(() => Math.random() - 0.5);
             let remainingSpecialRoles = shuffledSpecialRoles.slice(0, remainingPlayers);
 
-            // Compléter avec des employees si nécessaire
-            const employeesCount = remainingPlayers - remainingSpecialRoles.length;
-            const employees = Array(employeesCount).fill({
-                role: "Employee",
-                img: "/img/player-card/employee.png",
+            // Compléter avec des staff si nécessaire
+            const staffCount = remainingPlayers - remainingSpecialRoles.length;
+            const staff = Array(staffCount).fill({
+                role: "Staff",
+                img: "/img/player-card/staff.png",
                 player: "",
                 atouts: [],
-                hacked : false,
-                eliminated : false
+                hacked: false,
+                eliminated: false,
+                "description": "No special abilities but participates in debates and voting.",
+                "info": "A worker in an organization who may inadvertently or intentionally pose cybersecurity risks."
             });
 
             const allRoles = [
                 ...initialRoles,
                 ...remainingSpecialRoles,
-                ...employees,
+                ...staff,
             ];
-
-            console.log(allRoles)
 
             const shuffledRoles = allRoles.sort(() => Math.random() - 0.5);
 
@@ -119,11 +121,11 @@ export default function RoleDistributionContent() {
 
     const getRoleImage = (role) => {
         const roleData = rolesData.find(r => r.role === role);
-        return roleData ? roleData.img : "/img/player-card/employee.png";
+        return roleData ? roleData.img : "/img/player-card/staff.png";
     };
 
     return (
-        <main className="bg-[url('/img/background.png')] flex flex-col items-center pt-10 h-svh">
+        <main className="bg-[url('/img/background.png')] flex flex-col items-center pt-6 h-svh">
             {modal.visible && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -141,7 +143,7 @@ export default function RoleDistributionContent() {
             )}
 
             {currentRoleIndex < roles.length && (
-                <div className="flex flex-col items-center pt-20">
+                <div className="flex flex-col items-center pt-16">
                     <>
                         {flipped ? (
                             <p className="text-lg text-white text-center font-semibold h-20">
@@ -182,21 +184,34 @@ export default function RoleDistributionContent() {
                     </div>
 
                     {!flipped && (
-                        <div className="flex flex-col items-center mt-4 w-100">
-                            <div className="flex gap-2">
-                                <input
-                                    type="text"
-                                    value={playerName}
-                                    onChange={handleNameChange}
-                                    placeholder="Register your name"
-                                    className="p-2 border rounded w-60"
-                                />
-                                <button
-                                    onClick={handleSubmit}
-                                    className="bg-violet-900 border border-slate-400 text-white p-2 rounded"
-                                >
-                                    Valider
-                                </button>
+                        <div>
+                            <div className="flex flex-col items-center mt-4 w-100">
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={playerName}
+                                        onChange={handleNameChange}
+                                        placeholder="Register your name"
+                                        className="p-2 border rounded w-60"
+                                    />
+                                    <button
+                                        onClick={handleSubmit}
+                                        className="bg-violet-900 border border-slate-400 text-white p-2 rounded"
+                                    >
+                                        Valider
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="mt-10 text-white mx-14">
+                                {console.log(rolesData[currentRoleIndex])}
+                                <div>
+                                <p className="text-xl font-bold">Abilities</p>
+                                <p>{rolesData[currentRoleIndex].description}</p>
+                                </div>
+                                <div className="mt-8">
+                                <p className="text-xl font-bold">Info</p>
+                                <p>{rolesData[currentRoleIndex].info}</p>
+                                </div>
                             </div>
                         </div>
                     )}
