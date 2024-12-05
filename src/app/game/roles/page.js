@@ -18,7 +18,7 @@ export default function RoleDistribution() {
     useEffect(() => {
         if (numPlayers) {
             const specialRoles = rolesJson.filter(role => role.role !== "Employee" && role.role !== "Hacker").map(role => ({ ...role }));
-            const hackersCount = Math.round(numPlayers / 3);
+            const hackersCount = numPlayers <= 12 ? Math.floor(numPlayers / 3.5) : Math.ceil(numPlayers / 3.5);
             const remainingPlayers = numPlayers - hackersCount;
 
             // Rôles initiaux avec hackers
@@ -53,6 +53,8 @@ export default function RoleDistribution() {
                 ...remainingSpecialRoles,
                 ...employees,
             ];
+
+            console.log(allRoles)
 
             const shuffledRoles = allRoles.sort(() => Math.random() - 0.5);
 

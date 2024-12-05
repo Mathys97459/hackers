@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-export default function Players() {
+export default function Players({ setShowPlayers }) {
     const [rolesData, setRolesData] = useState([]);
+    const [nightNumber, setNightNumber] = useState(1);
     const [selectedRoleIndex, setSelectedRoleIndex] = useState(null); // Index du rôle sélectionné
     const [modalVisible, setModalVisible] = useState(false); // Visibilité de la modal
 
@@ -13,6 +14,9 @@ export default function Players() {
         if (storedRoles) {
             setRolesData(JSON.parse(storedRoles));
         }
+
+        const savedData = JSON.parse(localStorage.getItem("gameData")) || {};
+        setNightNumber(savedData.nightNumber || gameData.nightNumber || 1);
     }, []);
 
     const handleRoleClick = (index) => {
@@ -93,7 +97,7 @@ export default function Players() {
 
     return (
         <main className="w-100 bg-[url('/img/moon.png')] bg-cover bg-center bg-fixed flex flex-col items-center pt-6 transition-all duration-300">
-            <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
+            <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10 mb-40">
                 {rolesData.map((role, index) => (
                     <li
                         key={index}
@@ -153,6 +157,17 @@ export default function Players() {
                 ))}
             </ul>
 
+            <div
+                className="fixed top-full -translate-y-full bg-gradient-to-b from-zinc-950 to-purple-950 w-full h-36 cursor-pointer z-50 flex items-center justify-center gap-1"
+                onClick={() => setShowPlayers(false)}
+            >
+                <span className="text-white text-5xl">NIGHT {nightNumber}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="white" className="bi bi-arrow-down-short" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4" />
+                </svg>
+            </div>
+
+
             {modalVisible && selectedRoleIndex !== null && (
                 <div className="fixed inset-0 bg-black bg-opacity-25 flex justify-center items-center z-50">
                     <div className="bg-black/[0.7] p-6 rounded-lg shadow-lg text-white text-center w-96">
@@ -174,8 +189,8 @@ export default function Players() {
                                     <div
                                         key={index}
                                         className={`w-12 h-20 flex items-center justify-center rounded-md border ${rolesData[selectedRoleIndex]?.hacked
-                                                ? "bg-gray-600 border-gray-500 opacity-50 cursor-not-allowed"
-                                                : "bg-gray-800 border-gray-600"
+                                            ? "bg-gray-600 border-gray-500 opacity-50 cursor-not-allowed"
+                                            : "bg-gray-800 border-gray-600"
                                             }`}
                                         onClick={() => !rolesData[selectedRoleIndex]?.hacked && handleDeleteAtout(atout)} // Bloquer si hacké
                                     >
@@ -251,6 +266,8 @@ export default function Players() {
                             </button>
                         </div>
                     </div>
+
+
                 </div>
             )}
         </main>

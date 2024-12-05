@@ -31,8 +31,7 @@ export default function Game() {
                 </div>
             </div>
             {showPlayers && (
-                <Players />
-
+                <Players setShowPlayers={setShowPlayers}/>
             )}
         </>
     );
