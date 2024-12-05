@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import rolesJson from "../lib/roles.json";
 
+
 export default function RoleDistributionContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
