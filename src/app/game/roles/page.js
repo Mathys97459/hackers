@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import rolesJson from "../../lib/roles.json"; // Importation du fichier JSON contenant les rôles
+import rolesJson from "../../lib/roles.json";
 
 export default function RoleDistribution() {
     const searchParams = useSearchParams();

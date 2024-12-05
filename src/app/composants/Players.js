@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Players({ setShowPlayers }) {
     const [rolesData, setRolesData] = useState([]);
     const [nightNumber, setNightNumber] = useState(1);
     const [selectedRoleIndex, setSelectedRoleIndex] = useState(null); // Index du rôle sélectionné
     const [modalVisible, setModalVisible] = useState(false); // Visibilité de la modal
+    const [modalEndVisible, setModalEndVisible] = useState(false); // Visibilité de la modal
+    const [gameEndMessage, setGameEndMessage] = useState(""); // Message de fin de jeu
+    const router = useRouter();
 
     useEffect(() => {
         // Récupérer les données depuis le localStorage
@@ -18,6 +22,28 @@ export default function Players({ setShowPlayers }) {
         const savedData = JSON.parse(localStorage.getItem("gameData")) || {};
         setNightNumber(savedData.nightNumber || gameData.nightNumber || 1);
     }, []);
+
+    const checkGameEndConditions = () => {
+        const hackers = rolesData.filter(role => role.role === "Hacker");
+        const nonHackers = rolesData.filter(role => role.role !== "Hacker");
+
+        const allNonHackersDisabled = nonHackers.every(role => role.hacked || role.eliminated);
+        const allHackersEliminated = hackers.every(role => role.eliminated);
+
+        if (allNonHackersDisabled && hackers.some(hacker => !hacker.eliminated)) {
+            setGameEndMessage("HACKERS WIN !");
+            setModalEndVisible(true);
+            return true;
+        }
+
+        if (allHackersEliminated) {
+            setGameEndMessage("HACKERS LOST !");
+            setModalEndVisible(true);
+            return true;
+        }
+
+        return false;
+    }; 
 
     const handleRoleClick = (index) => {
         setSelectedRoleIndex(index); // Sélectionner le rôle sur lequel on a cliqué
@@ -71,12 +97,15 @@ export default function Players({ setShowPlayers }) {
         if (selectedRoleIndex !== null) {
             const updatedRolesData = [...rolesData];
             const selectedRole = updatedRolesData[selectedRoleIndex];
-
+    
             selectedRole.eliminated = !selectedRole.eliminated;
-
+    
             // Met à jour les données
             setRolesData(updatedRolesData);
             localStorage.setItem("roles", JSON.stringify(updatedRolesData));
+    
+            // Vérifie les conditions de fin de jeu
+            checkGameEndConditions();
         }
     };
 
@@ -84,12 +113,15 @@ export default function Players({ setShowPlayers }) {
         if (selectedRoleIndex !== null) {
             const updatedRolesData = [...rolesData];
             const selectedRole = updatedRolesData[selectedRoleIndex];
-
+    
             selectedRole.hacked = !selectedRole.hacked;
-
+    
             // Met à jour les données
             setRolesData(updatedRolesData);
             localStorage.setItem("roles", JSON.stringify(updatedRolesData));
+    
+            // Vérifie les conditions de fin de jeu
+            checkGameEndConditions();
         }
     };
 
@@ -268,6 +300,18 @@ export default function Players({ setShowPlayers }) {
                     </div>
 
 
+                </div>
+            )}
+            {gameEndMessage && modalEndVisible && (
+                <div className="fixed inset-0 bg-black bg-opacity-25 flex justify-center items-center z-50">
+                    <div className="flex flex-col items-center justify-center gap-5 bg-purple-950 p-6 rounded-lg shadow-lg text-white text-center w-96 h-1/4">
+                        <h2 className="text-4xl mb-4">{gameEndMessage}</h2>
+                        <button
+                            onClick={() => router.push(`/`)}
+                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                            Restart Game
+                        </button>
+                    </div>
                 </div>
             )}
         </main>
