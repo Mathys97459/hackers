@@ -1,11 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [players, setPlayers] = useState(8);
   const router = useRouter();
+
+  // Vérifier et initialiser achievements
+  useEffect(() => {
+    const achievements = localStorage.getItem("achievements");
+    if (!achievements) {
+      const initialAchievements = {
+        gamesPlayed: 0,
+        gamesWinHackers: 0,
+        gamesWinNonHackers: 0,
+      };
+      localStorage.setItem("achievements", JSON.stringify(initialAchievements));
+    }
+  }, []);
 
   const handleStartGame = () => {
     // Initialisation des données de jeu
@@ -29,7 +42,6 @@ export default function Home() {
       bonusDrawn: false,
     };
 
-    // Enregistrement dans le localStorage
     localStorage.setItem("gameData", JSON.stringify(initialGameData));
 
     // Redirection
@@ -55,9 +67,17 @@ export default function Home() {
         />
         <button
           onClick={handleStartGame}
-          className="mt-5 px-6 py-2 bg-white text-violet-900 border border-slate-400 rounded hover:bg-blue-600"
+          className="mt-8 px-6 py-2 bg-white text-purple-900 border border-slate-400 rounded hover:bg-blue-600"
         >
           PLAY GAME
+        </button>
+        <button
+          onClick={() => {
+            router.push(`achievements`);
+          }}
+          className="mt-5 px-6 py-2 bg-purple-950 text-white border border-slate-400 rounded hover:bg-blue-600"
+        >
+          ACHIEVEMENTS
         </button>
       </div>
     </main>

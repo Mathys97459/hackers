@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function Players({ setShowPlayers }) {
     const [rolesData, setRolesData] = useState([]);
+    const [achievementsData, setAchievementsData] = useState([]);
     const [nightNumber, setNightNumber] = useState(1);
     const [selectedRoleIndex, setSelectedRoleIndex] = useState(null); // Index du rôle sélectionné
     const [modalVisible, setModalVisible] = useState(false); // Visibilité de la modal
@@ -13,10 +14,14 @@ export default function Players({ setShowPlayers }) {
     const router = useRouter();
 
     useEffect(() => {
-        // Récupérer les données depuis le localStorage
         const storedRoles = localStorage.getItem("roles");
         if (storedRoles) {
             setRolesData(JSON.parse(storedRoles));
+        }
+
+        const storedAchievements = localStorage.getItem("achievements");
+        if (storedAchievements) {
+            setAchievementsData(JSON.parse(storedAchievements));
         }
 
         const savedData = JSON.parse(localStorage.getItem("gameData")) || {};
@@ -33,17 +38,48 @@ export default function Players({ setShowPlayers }) {
         if (allNonHackersDisabled && hackers.some(hacker => !hacker.eliminated)) {
             setGameEndMessage("HACKERS WIN !");
             setModalEndVisible(true);
+            updateAchievements(true)
             return true;
         }
 
         if (allHackersEliminated) {
             setGameEndMessage("HACKERS LOST !");
             setModalEndVisible(true);
+            updateAchievements(false)
             return true;
         }
 
         return false;
     }; 
+
+    function updateAchievements(isHackersWinner) {
+        // Vérifie si achievementsData existe déjà dans le localStorage
+        const storedAchievements = localStorage.getItem('achievements');
+        
+        // Si il n'y a pas de données précédentes, initialise achievementsData
+        let achievementsData = storedAchievements ? JSON.parse(storedAchievements) : {
+          gamesPlayed: 0,
+          gamesWinHackers: 0,
+          gamesWinNonHackers: 0,
+        };
+      
+        // Incrémente le nombre de parties jouées
+        achievementsData.gamesPlayed += 1;
+      
+        // Incrémente le compteur correspondant au gagnant
+        if (isHackersWinner) {
+          achievementsData.gamesWinHackers += 1;
+        } else {
+          achievementsData.gamesWinNonHackers += 1;
+        }
+      
+        // Sauvegarde achievementsData mis à jour dans le localStorage
+        localStorage.setItem('achievements', JSON.stringify(achievementsData));
+      
+        // Optionnel : afficher les achievements mis à jour
+        console.log('Achievements Data Updated:', achievementsData);
+      }
+      
 
     const handleRoleClick = (index) => {
         setSelectedRoleIndex(index); // Sélectionner le rôle sur lequel on a cliqué
