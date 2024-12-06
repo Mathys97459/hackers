@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <main className="bg-[url('/img/background.png')] flex flex-col items-center text-white gap-10 justify-start pt-28 h-svh">
-      <h1 className="text-4xl font-bold mb-6">Hackers</h1>
+      <h1 className="text-5xl font-bold mb-0">Hackers</h1>
       <img className="w-6/12" src="/img/dos-carte.png" />
       <div className="flex flex-col items-center">
         <label htmlFor="players" className="text-sm mb-2">
@@ -67,7 +67,7 @@ export default function Home() {
         />
         <button
           onClick={handleStartGame}
-          className="mt-8 px-6 py-2 bg-white text-purple-900 border border-slate-400 rounded hover:bg-blue-600"
+          className="mt-8 px-6 py-2 bg-white text-purple-900 border border-slate-400 rounded hover:bg-purple-900 hover:text-white"
         >
           PLAY GAME
         </button>
@@ -75,7 +75,7 @@ export default function Home() {
           onClick={() => {
             router.push(`achievements`);
           }}
-          className="mt-5 px-6 py-2 bg-purple-950 text-white border border-slate-400 rounded hover:bg-blue-600"
+          className="mt-5 px-6 py-2 bg-purple-900 text-white border border-slate-400 rounded hover:bg-purple-700"
         >
           ACHIEVEMENTS
         </button>

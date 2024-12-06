@@ -26,9 +26,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${anybody.variable} antialiased`}
+        className={`${anybody.variable} antialiased flex justify-center`}
       >
-        {children}
+        <div className="md:w-2/5 w-full">
+          {children}
+        </div>
       </body>
     </html>
   );

@@ -81,8 +81,11 @@ export default function RoleDistributionContent() {
 
         if (flipped) {
             setPlayerName("");
+            setCurrentRoleIndex(currentRoleIndex + 1);
+        }else{
+            handleSubmit()
         }
-        setCurrentRoleIndex(currentRoleIndex + 1);
+        console.log(currentRoleIndex)
         setFlipped(!flipped);
     };
 
@@ -125,7 +128,7 @@ export default function RoleDistributionContent() {
     };
 
     return (
-        <main className="bg-[url('/img/background.png')] flex flex-col items-center pt-6 h-svh">
+        <main className="bg-[url('/img/background.png')] bg-cover flex flex-col items-center pt-4 pb-10 h-svh">
             {modal.visible && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-6 rounded shadow-lg text-center">
@@ -143,7 +146,7 @@ export default function RoleDistributionContent() {
             )}
 
             {currentRoleIndex < roles.length && (
-                <div className="flex flex-col items-center pt-16">
+                <div className="flex flex-col items-center pt-10">
                     <>
                         {flipped ? (
                             <p className="text-lg text-white text-center font-semibold h-20">
@@ -203,14 +206,14 @@ export default function RoleDistributionContent() {
                                 </div>
                             </div>
                             <div className="mt-10 text-white mx-14">
-                                {console.log(rolesData[currentRoleIndex])}
+                                {console.log(rolesData)}
                                 <div>
-                                <p className="text-xl font-bold">Abilities</p>
-                                <p>{rolesData[currentRoleIndex].description}</p>
+                                <p className="text-lg font-bold">Abilities</p>
+                                <p className="text-sm">{rolesData[currentRoleIndex].description}</p>
                                 </div>
-                                <div className="mt-8">
-                                <p className="text-xl font-bold">Info</p>
-                                <p>{rolesData[currentRoleIndex].info}</p>
+                                <div className="mt-6">
+                                <p className="text-lg font-bold">Info</p>
+                                <p className="text-sm">{rolesData[currentRoleIndex].info}</p>
                                 </div>
                             </div>
                         </div>

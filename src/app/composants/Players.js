@@ -226,7 +226,7 @@ export default function Players({ setShowPlayers }) {
             </ul>
 
             <div
-                className="fixed top-full -translate-y-full bg-gradient-to-b from-zinc-950 to-purple-950 w-full h-36 cursor-pointer z-50 flex items-center justify-center gap-1"
+                className="fixed top-full -translate-y-full bg-gradient-to-b from-zinc-950 to-purple-950 h-36 cursor-pointer z-50 flex items-center justify-center gap-1 md:w-1/3 w-full"
                 onClick={() => setShowPlayers(false)}
             >
                 <span className="text-white text-5xl">NIGHT {nightNumber}</span>
